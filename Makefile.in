@@ -112,6 +112,7 @@ MMEX_OBJECTS =  \
 	mmex_appstartdialog.o \
 	mmex_assetdialog.o \
 	mmex_assetspanel.o \
+	mmex_assignmentdialog.o \
 	mmex_attachmentdialog.o \
 	mmex_billsdepositsdialog.o \
 	mmex_billsdepositspanel.o \
@@ -126,6 +127,7 @@ MMEX_OBJECTS =  \
 	mmex_filtertransdialog.o \
 	mmex_general_report_manager.o \
 	mmex_images_list.o \
+	mmex_mainassignmentdialog.o \
 	mmex_maincurrencydialog.o \
 	mmex_minimal_editor.o \
 	mmex_mmCalculator.o \
@@ -185,6 +187,7 @@ MMEX_OBJECTS =  \
 	mmex_univcsvdialog.o \
 	mmex_Model_Account.o \
 	mmex_Model_Asset.o \
+	mmex_Model_Assignment.o \
 	mmex_Model_Attachment.o \
 	mmex_Model_Billsdeposits.o \
 	mmex_Model_Budget.o \
@@ -192,7 +195,9 @@ MMEX_OBJECTS =  \
 	mmex_Model_Budgetyear.o \
 	mmex_Model_Category.o \
 	mmex_Model_Checking.o \
+	mmex_Model_Condition.o \
 	mmex_Model_Currency.o \
+	mmex_Model_Field.o \
 	mmex_Model_Infotable.o \
 	mmex_Model_Payee.o \
 	mmex_Model_Report.o \
@@ -468,6 +473,9 @@ mmex_assetdialog.o: $(srcdir)/src/assetdialog.cpp
 mmex_assetspanel.o: $(srcdir)/src/assetspanel.cpp
 	$(CXXC) -c -o $@ $(MMEX_CXXFLAGS) $(srcdir)/src/assetspanel.cpp
 
+mmex_assignmentdialog.o: $(srcdir)/src/assignmentdialog.cpp
+	$(CXXC) -c -o $@ $(MMEX_CXXFLAGS) $(srcdir)/src/assignmentdialog.cpp
+
 mmex_attachmentdialog.o: $(srcdir)/src/attachmentdialog.cpp
 	$(CXXC) -c -o $@ $(MMEX_CXXFLAGS) $(srcdir)/src/attachmentdialog.cpp
 
@@ -509,6 +517,9 @@ mmex_general_report_manager.o: $(srcdir)/src/general_report_manager.cpp
 
 mmex_images_list.o: $(srcdir)/src/images_list.cpp
 	$(CXXC) -c -o $@ $(MMEX_CXXFLAGS) $(srcdir)/src/images_list.cpp
+
+mmex_mainassignmentdialog.o: $(srcdir)/src/mainassignmentdialog.cpp
+	$(CXXC) -c -o $@ $(MMEX_CXXFLAGS) $(srcdir)/src/mainassignmentdialog.cpp
 
 mmex_maincurrencydialog.o: $(srcdir)/src/maincurrencydialog.cpp
 	$(CXXC) -c -o $@ $(MMEX_CXXFLAGS) $(srcdir)/src/maincurrencydialog.cpp
@@ -687,6 +698,9 @@ mmex_Model_Account.o: $(srcdir)/src/model/Model_Account.cpp
 mmex_Model_Asset.o: $(srcdir)/src/model/Model_Asset.cpp
 	$(CXXC) -c -o $@ $(MMEX_CXXFLAGS) $(srcdir)/src/model/Model_Asset.cpp
 
+mmex_Model_Assignment.o: $(srcdir)/src/model/Model_Assignment.cpp
+	$(CXXC) -c -o $@ $(MMEX_CXXFLAGS) $(srcdir)/src/model/Model_Assignment.cpp
+
 mmex_Model_Attachment.o: $(srcdir)/src/model/Model_Attachment.cpp
 	$(CXXC) -c -o $@ $(MMEX_CXXFLAGS) $(srcdir)/src/model/Model_Attachment.cpp
 
@@ -708,8 +722,14 @@ mmex_Model_Category.o: $(srcdir)/src/model/Model_Category.cpp
 mmex_Model_Checking.o: $(srcdir)/src/model/Model_Checking.cpp
 	$(CXXC) -c -o $@ $(MMEX_CXXFLAGS) $(srcdir)/src/model/Model_Checking.cpp
 
+mmex_Model_Condition.o: $(srcdir)/src/model/Model_Condition.cpp
+	$(CXXC) -c -o $@ $(MMEX_CXXFLAGS) $(srcdir)/src/model/Model_Condition.cpp
+
 mmex_Model_Currency.o: $(srcdir)/src/model/Model_Currency.cpp
 	$(CXXC) -c -o $@ $(MMEX_CXXFLAGS) $(srcdir)/src/model/Model_Currency.cpp
+
+mmex_Model_Field.o: $(srcdir)/src/model/Model_Field.cpp
+	$(CXXC) -c -o $@ $(MMEX_CXXFLAGS) $(srcdir)/src/model/Model_Field.cpp
 
 mmex_Model_Infotable.o: $(srcdir)/src/model/Model_Infotable.cpp
 	$(CXXC) -c -o $@ $(MMEX_CXXFLAGS) $(srcdir)/src/model/Model_Infotable.cpp

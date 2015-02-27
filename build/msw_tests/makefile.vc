@@ -160,6 +160,7 @@ MMEX_TESTS_OBJECTS =  \
 	mmex_tests_appstartdialog.obj \
 	mmex_tests_assetdialog.obj \
 	mmex_tests_assetspanel.obj \
+	mmex_tests_assignmentdialog.obj \
 	mmex_tests_attachmentdialog.obj \
 	mmex_tests_billsdepositsdialog.obj \
 	mmex_tests_billsdepositspanel.obj \
@@ -174,6 +175,7 @@ MMEX_TESTS_OBJECTS =  \
 	mmex_tests_filtertransdialog.obj \
 	mmex_tests_general_report_manager.obj \
 	mmex_tests_images_list.obj \
+	mmex_tests_mainassignmentdialog.obj \
 	mmex_tests_maincurrencydialog.obj \
 	mmex_tests_minimal_editor.obj \
 	mmex_tests_mmCalculator.obj \
@@ -233,6 +235,7 @@ MMEX_TESTS_OBJECTS =  \
 	mmex_tests_univcsvdialog.obj \
 	mmex_tests_Model_Account.obj \
 	mmex_tests_Model_Asset.obj \
+	mmex_tests_Model_Assignment.obj \
 	mmex_tests_Model_Attachment.obj \
 	mmex_tests_Model_Billsdeposits.obj \
 	mmex_tests_Model_Budget.obj \
@@ -240,7 +243,9 @@ MMEX_TESTS_OBJECTS =  \
 	mmex_tests_Model_Budgetyear.obj \
 	mmex_tests_Model_Category.obj \
 	mmex_tests_Model_Checking.obj \
+	mmex_tests_Model_Condition.obj \
 	mmex_tests_Model_Currency.obj \
+	mmex_tests_Model_Field.obj \
 	mmex_tests_Model_Infotable.obj \
 	mmex_tests_Model_Payee.obj \
 	mmex_tests_Model_Report.obj \
@@ -800,6 +805,9 @@ mmex_tests_assetdialog.obj: ..\..\src\assetdialog.cpp
 mmex_tests_assetspanel.obj: ..\..\src\assetspanel.cpp
 	$(CXX) /c /nologo /TP /Fo$@ $(MMEX_TESTS_CXXFLAGS) ..\..\src\assetspanel.cpp
 
+mmex_tests_assignmentdialog.obj: ..\..\src\assignmentdialog.cpp
+	$(CXX) /c /nologo /TP /Fo$@ $(MMEX_TESTS_CXXFLAGS) ..\..\src\assignmentdialog.cpp
+
 mmex_tests_attachmentdialog.obj: ..\..\src\attachmentdialog.cpp
 	$(CXX) /c /nologo /TP /Fo$@ $(MMEX_TESTS_CXXFLAGS) ..\..\src\attachmentdialog.cpp
 
@@ -841,6 +849,9 @@ mmex_tests_general_report_manager.obj: ..\..\src\general_report_manager.cpp
 
 mmex_tests_images_list.obj: ..\..\src\images_list.cpp
 	$(CXX) /c /nologo /TP /Fo$@ $(MMEX_TESTS_CXXFLAGS) ..\..\src\images_list.cpp
+
+mmex_tests_mainassignmentdialog.obj: ..\..\src\mainassignmentdialog.cpp
+	$(CXX) /c /nologo /TP /Fo$@ $(MMEX_TESTS_CXXFLAGS) ..\..\src\mainassignmentdialog.cpp
 
 mmex_tests_maincurrencydialog.obj: ..\..\src\maincurrencydialog.cpp
 	$(CXX) /c /nologo /TP /Fo$@ $(MMEX_TESTS_CXXFLAGS) ..\..\src\maincurrencydialog.cpp
@@ -1019,6 +1030,9 @@ mmex_tests_Model_Account.obj: ..\..\src\model\Model_Account.cpp
 mmex_tests_Model_Asset.obj: ..\..\src\model\Model_Asset.cpp
 	$(CXX) /c /nologo /TP /Fo$@ $(MMEX_TESTS_CXXFLAGS) ..\..\src\model\Model_Asset.cpp
 
+mmex_tests_Model_Assignment.obj: ..\..\src\model\Model_Assignment.cpp
+	$(CXX) /c /nologo /TP /Fo$@ $(MMEX_TESTS_CXXFLAGS) ..\..\src\model\Model_Assignment.cpp
+
 mmex_tests_Model_Attachment.obj: ..\..\src\model\Model_Attachment.cpp
 	$(CXX) /c /nologo /TP /Fo$@ $(MMEX_TESTS_CXXFLAGS) ..\..\src\model\Model_Attachment.cpp
 
@@ -1040,8 +1054,14 @@ mmex_tests_Model_Category.obj: ..\..\src\model\Model_Category.cpp
 mmex_tests_Model_Checking.obj: ..\..\src\model\Model_Checking.cpp
 	$(CXX) /c /nologo /TP /Fo$@ $(MMEX_TESTS_CXXFLAGS) ..\..\src\model\Model_Checking.cpp
 
+mmex_tests_Model_Condition.obj: ..\..\src\model\Model_Condition.cpp
+	$(CXX) /c /nologo /TP /Fo$@ $(MMEX_TESTS_CXXFLAGS) ..\..\src\model\Model_Condition.cpp
+
 mmex_tests_Model_Currency.obj: ..\..\src\model\Model_Currency.cpp
 	$(CXX) /c /nologo /TP /Fo$@ $(MMEX_TESTS_CXXFLAGS) ..\..\src\model\Model_Currency.cpp
+
+mmex_tests_Model_Field.obj: ..\..\src\model\Model_Field.cpp
+	$(CXX) /c /nologo /TP /Fo$@ $(MMEX_TESTS_CXXFLAGS) ..\..\src\model\Model_Field.cpp
 
 mmex_tests_Model_Infotable.obj: ..\..\src\model\Model_Infotable.cpp
 	$(CXX) /c /nologo /TP /Fo$@ $(MMEX_TESTS_CXXFLAGS) ..\..\src\model\Model_Infotable.cpp

@@ -409,6 +409,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\src\model\Model_Assignment.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\model\Model_Attachment.cpp"
 				>
 			</File>
@@ -437,7 +441,15 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\src\model\Model_Condition.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\model\Model_Currency.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\model\Model_Field.cpp"
 				>
 			</File>
 			<File
@@ -494,6 +506,10 @@
 			</File>
 			<File
 				RelativePath="..\..\src\assetspanel.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\assignmentdialog.cpp"
 				>
 			</File>
 			<File
@@ -594,6 +610,10 @@
 			</File>
 			<File
 				RelativePath="..\..\src\reports\incexpenses.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\mainassignmentdialog.cpp"
 				>
 			</File>
 			<File
@@ -811,6 +831,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\src\db\DB_Table_Assignment_V1.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\db\DB_Table_Attachment_V1.h"
 				>
 			</File>
@@ -839,7 +863,15 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\src\db\DB_Table_Condition_V1.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\db\DB_Table_Currencyformats_V1.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\db\DB_Table_Field_V1.h"
 				>
 			</File>
 			<File
@@ -891,6 +923,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\src\model\Model_Assignment.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\model\Model_Attachment.h"
 				>
 			</File>
@@ -919,7 +955,15 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\src\model\Model_Condition.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\model\Model_Currency.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\model\Model_Field.h"
 				>
 			</File>
 			<File
@@ -976,6 +1020,10 @@
 			</File>
 			<File
 				RelativePath="..\..\src\assetspanel.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\assignmentdialog.h"
 				>
 			</File>
 			<File
@@ -1076,6 +1124,10 @@
 			</File>
 			<File
 				RelativePath="..\..\src\reports\incexpenses.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\mainassignmentdialog.h"
 				>
 			</File>
 			<File

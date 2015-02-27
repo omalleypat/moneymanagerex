@@ -122,6 +122,7 @@ MMEX_OBJECTS =  \
 	mmex_appstartdialog.obj \
 	mmex_assetdialog.obj \
 	mmex_assetspanel.obj \
+	mmex_assignmentdialog.obj \
 	mmex_attachmentdialog.obj \
 	mmex_billsdepositsdialog.obj \
 	mmex_billsdepositspanel.obj \
@@ -136,6 +137,7 @@ MMEX_OBJECTS =  \
 	mmex_filtertransdialog.obj \
 	mmex_general_report_manager.obj \
 	mmex_images_list.obj \
+	mmex_mainassignmentdialog.obj \
 	mmex_maincurrencydialog.obj \
 	mmex_minimal_editor.obj \
 	mmex_mmCalculator.obj \
@@ -195,6 +197,7 @@ MMEX_OBJECTS =  \
 	mmex_univcsvdialog.obj \
 	mmex_Model_Account.obj \
 	mmex_Model_Asset.obj \
+	mmex_Model_Assignment.obj \
 	mmex_Model_Attachment.obj \
 	mmex_Model_Billsdeposits.obj \
 	mmex_Model_Budget.obj \
@@ -202,7 +205,9 @@ MMEX_OBJECTS =  \
 	mmex_Model_Budgetyear.obj \
 	mmex_Model_Category.obj \
 	mmex_Model_Checking.obj \
+	mmex_Model_Condition.obj \
 	mmex_Model_Currency.obj \
+	mmex_Model_Field.obj \
 	mmex_Model_Infotable.obj \
 	mmex_Model_Payee.obj \
 	mmex_Model_Report.obj \
@@ -675,6 +680,9 @@ mmex_assetdialog.obj: ..\..\src\assetdialog.cpp
 mmex_assetspanel.obj: ..\..\src\assetspanel.cpp
 	$(CXX) /c /nologo /TP /Fo$@ $(MMEX_CXXFLAGS) ..\..\src\assetspanel.cpp
 
+mmex_assignmentdialog.obj: ..\..\src\assignmentdialog.cpp
+	$(CXX) /c /nologo /TP /Fo$@ $(MMEX_CXXFLAGS) ..\..\src\assignmentdialog.cpp
+
 mmex_attachmentdialog.obj: ..\..\src\attachmentdialog.cpp
 	$(CXX) /c /nologo /TP /Fo$@ $(MMEX_CXXFLAGS) ..\..\src\attachmentdialog.cpp
 
@@ -716,6 +724,9 @@ mmex_general_report_manager.obj: ..\..\src\general_report_manager.cpp
 
 mmex_images_list.obj: ..\..\src\images_list.cpp
 	$(CXX) /c /nologo /TP /Fo$@ $(MMEX_CXXFLAGS) ..\..\src\images_list.cpp
+
+mmex_mainassignmentdialog.obj: ..\..\src\mainassignmentdialog.cpp
+	$(CXX) /c /nologo /TP /Fo$@ $(MMEX_CXXFLAGS) ..\..\src\mainassignmentdialog.cpp
 
 mmex_maincurrencydialog.obj: ..\..\src\maincurrencydialog.cpp
 	$(CXX) /c /nologo /TP /Fo$@ $(MMEX_CXXFLAGS) ..\..\src\maincurrencydialog.cpp
@@ -894,6 +905,9 @@ mmex_Model_Account.obj: ..\..\src\model\Model_Account.cpp
 mmex_Model_Asset.obj: ..\..\src\model\Model_Asset.cpp
 	$(CXX) /c /nologo /TP /Fo$@ $(MMEX_CXXFLAGS) ..\..\src\model\Model_Asset.cpp
 
+mmex_Model_Assignment.obj: ..\..\src\model\Model_Assignment.cpp
+	$(CXX) /c /nologo /TP /Fo$@ $(MMEX_CXXFLAGS) ..\..\src\model\Model_Assignment.cpp
+
 mmex_Model_Attachment.obj: ..\..\src\model\Model_Attachment.cpp
 	$(CXX) /c /nologo /TP /Fo$@ $(MMEX_CXXFLAGS) ..\..\src\model\Model_Attachment.cpp
 
@@ -915,8 +929,14 @@ mmex_Model_Category.obj: ..\..\src\model\Model_Category.cpp
 mmex_Model_Checking.obj: ..\..\src\model\Model_Checking.cpp
 	$(CXX) /c /nologo /TP /Fo$@ $(MMEX_CXXFLAGS) ..\..\src\model\Model_Checking.cpp
 
+mmex_Model_Condition.obj: ..\..\src\model\Model_Condition.cpp
+	$(CXX) /c /nologo /TP /Fo$@ $(MMEX_CXXFLAGS) ..\..\src\model\Model_Condition.cpp
+
 mmex_Model_Currency.obj: ..\..\src\model\Model_Currency.cpp
 	$(CXX) /c /nologo /TP /Fo$@ $(MMEX_CXXFLAGS) ..\..\src\model\Model_Currency.cpp
+
+mmex_Model_Field.obj: ..\..\src\model\Model_Field.cpp
+	$(CXX) /c /nologo /TP /Fo$@ $(MMEX_CXXFLAGS) ..\..\src\model\Model_Field.cpp
 
 mmex_Model_Infotable.obj: ..\..\src\model\Model_Infotable.cpp
 	$(CXX) /c /nologo /TP /Fo$@ $(MMEX_CXXFLAGS) ..\..\src\model\Model_Infotable.cpp

@@ -39,6 +39,7 @@
 #include "../resources/car.xpm"
 #include "../resources/house.xpm"
 #include "../resources/hourglass.xpm"
+#include "../resources/assignment.xpm"
 
 wxImageList* navtree_images_list()
 {
@@ -79,6 +80,7 @@ wxImageList* navtree_images_list()
     imageList->Add(wxBitmap(wxImage(yandex_money_xpm).Scale(16, 16)));
     imageList->Add(wxBitmap(wxImage(web_money_xpm).Scale(16, 16)));
     imageList->Add(wxBitmap(wxImage(rubik_cube_xpm).Scale(16, 16)));
+    imageList->Add(wxBitmap(wxImage(assignment_xpm).Scale(16, 16)));
 
     return imageList;
 }

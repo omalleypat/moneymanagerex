@@ -40,6 +40,7 @@
 #include "filtertransdialog.h"
 #include "images_list.h"
 #include "maincurrencydialog.h"
+#include "mainassignmentdialog.h"
 #include "mmcheckingpanel.h"
 #include "mmhelppanel.h"
 #include "mmhomepagepanel.h"
@@ -82,6 +83,9 @@
 #include "model/Model_Report.h"
 #include "model/Model_Attachment.h"
 #include "model/Model_Usage.h"
+#include "model/Model_Field.h"
+#include "model/Model_Condition.h"
+#include "model/Model_Assignment.h"
 #include "search/Search.h"
 #include "transdialog.h"
 #include "webapp.h"
@@ -135,6 +139,7 @@
 #include "../resources/user_edit.xpm"
 #include "../resources/wrench.xpm"
 #include "../resources/accounttree.xpm"
+#include "../resources/assignment.xpm"
 
 //----------------------------------------------------------------------------
 
@@ -179,6 +184,7 @@ EVT_MENU(MENU_DB_VACUUM, mmGUIFrame::OnVacuumDB)
 
 EVT_MENU(MENU_ASSETS, mmGUIFrame::OnAssets)
 EVT_MENU(MENU_CURRENCY, mmGUIFrame::OnCurrency)
+EVT_MENU(MENU_ASSIGNMENT, mmGUIFrame::OnAssignment)
 EVT_MENU(MENU_TRANSACTIONREPORT, mmGUIFrame::OnTransactionReport)
 EVT_MENU(wxID_VIEW_LIST, mmGUIFrame::OnGeneralReportManager)
 EVT_MENU(MENU_TREEPOPUP_LAUNCHWEBSITE, mmGUIFrame::OnLaunchAccountWebsite)
@@ -648,6 +654,7 @@ void mmGUIFrame::menuEnableItems(bool enable)
     menuBar_->FindItem(wxID_PREFERENCES)->Enable(enable);
     menuBar_->FindItem(MENU_BILLSDEPOSITS)->Enable(enable);
     menuBar_->FindItem(MENU_CURRENCY)->Enable(enable);
+    menuBar_->FindItem(MENU_ASSIGNMENT)->Enable(enable);
     menuBar_->FindItem(MENU_ASSETS)->Enable(enable);
     menuBar_->FindItem(MENU_BUDGETSETUPDIALOG)->Enable(enable);
     menuBar_->FindItem(MENU_TRANSACTIONREPORT)->Enable(enable);
@@ -657,6 +664,7 @@ void mmGUIFrame::menuEnableItems(bool enable)
     toolBar_->EnableTool(MENU_ORGPAYEE, enable);
     toolBar_->EnableTool(MENU_ORGCATEGS, enable);
     toolBar_->EnableTool(MENU_CURRENCY, enable);
+    toolBar_->EnableTool(MENU_ASSIGNMENT, enable);
     toolBar_->EnableTool(wxID_VIEW_LIST, enable);
 }
 //----------------------------------------------------------------------------
@@ -1454,6 +1462,11 @@ void mmGUIFrame::createMenu()
         , _("Organize Currency..."), _("Organize Currency"));
     menuItemCurrency->SetBitmap(wxBitmap(money_dollar_xpm));
     menuTools->Append(menuItemCurrency);
+    
+    wxMenuItem* menuItemAssignment = new wxMenuItem(menuTools, MENU_ASSIGNMENT
+        , _("Manage Assignment"), _("Show Management Assignment Dialog"));
+    menuItemAssignment->SetBitmap(wxBitmap(assignment_xpm));
+    menuTools->Append(menuItemAssignment);
 
     wxMenu *menuRelocation = new wxMenu;
     wxMenuItem* menuItemCategoryRelocation = new wxMenuItem(menuRelocation
@@ -1607,6 +1620,7 @@ void mmGUIFrame::CreateToolBar()
     toolBar_->AddTool(MENU_ORGCATEGS, _("Organize Categories"), wxBitmap(categoryedit_xpm), _("Show Organize Categories Dialog"));
     toolBar_->AddTool(MENU_ORGPAYEE, _("Organize Payees"), wxBitmap(user_edit_xpm), _("Show Organize Payees Dialog"));
     toolBar_->AddTool(MENU_CURRENCY, _("Organize Currency"), wxBitmap(money_dollar_xpm), _("Show Organize Currency Dialog"));
+    toolBar_->AddTool(MENU_ASSIGNMENT, _("Manage Assignment"), wxBitmap(assignment_xpm), _("Show Management Assignment Dialog"));
     toolBar_->AddSeparator();
     toolBar_->AddTool(MENU_TRANSACTIONREPORT, _("Transaction Report Filter"), wxBitmap(filter_xpm), _("Transaction Report Filter"));
     toolBar_->AddSeparator();
@@ -1643,6 +1657,9 @@ void mmGUIFrame::InitializeModelTables()
     m_all_models.push_back(&Model_Budget::instance(m_db.get()));
     m_all_models.push_back(&Model_Report::instance(m_db.get()));
     m_all_models.push_back(&Model_Attachment::instance(m_db.get()));
+    m_all_models.push_back(&Model_Field::instance(m_db.get()));
+    m_all_models.push_back(&Model_Condition::instance(m_db.get()));
+    m_all_models.push_back(&Model_Assignment::instance(m_db.get()));
 }
 
 bool mmGUIFrame::createDataStore(const wxString& fileName, const wxString& pwd, bool openingNew)
@@ -2478,6 +2495,12 @@ void mmGUIFrame::OnAssets(wxCommandEvent& /*event*/)
 void mmGUIFrame::OnCurrency(wxCommandEvent& /*event*/)
 {
     mmMainCurrencyDialog(this, false).ShowModal();
+    refreshPanelData();
+}
+
+void mmGUIFrame::OnAssignment(wxCommandEvent& /*event*/)
+{
+    mmMainAssignmentDialog(this,m_db.get()).ShowModal();
     refreshPanelData();
 }
 //----------------------------------------------------------------------------
