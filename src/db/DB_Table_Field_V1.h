@@ -69,7 +69,7 @@ struct DB_Table_FIELD_V1 : public DB_Table
 			try
 			{
 				db->ExecuteUpdate("CREATE TABLE FIELD_V1 (  FIELDID INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL  UNIQUE ,  FIELDNAME VARCHAR NOT NULL UNIQUE)");
-        db->ExecuteUpdate("INSERT INTO FIELD_V1 (FIELDNAME) VALUES ('note')");
+        db->ExecuteUpdate("INSERT INTO FIELD_V1 (FIELDNAME) VALUES ('notes')");
 			}
 			catch(const wxSQLite3Exception &e) 
 			{ 
