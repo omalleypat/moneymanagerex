@@ -185,9 +185,6 @@ private:
     void OnViewToolbar(wxCommandEvent &event);
     void OnViewStatusbar(wxCommandEvent &event);
     void OnViewLinks(wxCommandEvent &event);
-    void OnViewBankAccounts(wxCommandEvent &event);
-    void OnViewTermAccounts(wxCommandEvent &event);
-    void OnViewStockAccounts(wxCommandEvent &event);
     void OnViewBudgetFinancialYears(wxCommandEvent &event);
     void OnViewBudgetTransferTotal(wxCommandEvent &event);
     void OnViewBudgetSetupSummary(wxCommandEvent &event);

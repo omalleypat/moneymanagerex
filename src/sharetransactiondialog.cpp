@@ -64,8 +64,8 @@ ShareTransactionDialog::ShareTransactionDialog(wxWindow* parent, Model_Stock::Da
     , m_translink_entry(nullptr)
     , m_share_entry(nullptr)
     , m_checking_entry(nullptr)
+    , m_dialog_heading(_("Add Share Transaction"))
 {
-    m_dialog_heading = _("Add Share Transaction");
     long style = wxCAPTION | wxSYSTEM_MENU | wxCLOSE_BOX;
     Create(parent, wxID_ANY, m_dialog_heading, wxDefaultPosition, wxSize(400, 300), style);
 }
@@ -82,8 +82,8 @@ ShareTransactionDialog::ShareTransactionDialog(wxWindow* parent, Model_Translink
     , m_attachments(nullptr)
     , m_translink_entry(translink_entry)
     , m_checking_entry(checking_entry)
+    , m_dialog_heading(_("Add Share Transaction"))
 {
-    m_dialog_heading = _("Add Share Transaction");
     if (translink_entry)
     {
         m_dialog_heading = _("Edit Share Transaction");
@@ -146,7 +146,7 @@ void ShareTransactionDialog::DataToControls()
         if (m_translink_entry && m_share_entry)
         {
             int precision = m_share_entry->SHARENUMBER == floor(m_share_entry->SHARENUMBER) ? 0 : 6;
-            m_share_num->SetValue(abs(m_share_entry->SHARENUMBER), precision);
+            m_share_num->SetValue(std::abs(m_share_entry->SHARENUMBER), precision);
             m_share_price->SetValue(m_share_entry->SHAREPRICE, 6);
             m_commission->SetValue(m_share_entry->SHARECOMMISSION);
             m_share_lot->SetValue(m_share_entry->SHARELOT);
@@ -154,7 +154,7 @@ void ShareTransactionDialog::DataToControls()
             Model_Checking::Data* checking_entry = Model_Checking::instance().get(m_translink_entry->CHECKINGACCOUNTID);
             m_transaction_panel->TransactionDate(Model_Checking::TRANSDATE(checking_entry));
             m_transaction_panel->SetTransactionValue(
-                (abs(m_share_entry->SHARENUMBER) * m_share_entry->SHAREPRICE) + m_share_entry->SHARECOMMISSION, true);
+                (std::abs(m_share_entry->SHARENUMBER) * m_share_entry->SHAREPRICE) + m_share_entry->SHARECOMMISSION, true);
         }
         else
         {
