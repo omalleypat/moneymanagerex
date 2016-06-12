@@ -111,6 +111,24 @@ void mmGUIApp::HandleEvent(wxEvtHandler *handler, wxEventFunction func, wxEvent&
         wxLogError("%s", e.what());
     }
 }
+
+int mmGUIApp::FilterEvent(wxEvent &event)
+{
+    int ret = wxApp::FilterEvent(event);
+
+    if (event.GetEventType() == wxEVT_SHOW)
+    {
+        wxWindow *win = (wxWindow*)event.GetEventObject();
+
+        if (win && win->IsTopLevel() && win != this->m_frame) // wxDialog & wxFrame http://docs.wxwidgets.org/trunk/classwx_top_level_window.html
+        {
+            Model_Usage::instance().pageview(win);
+        }
+    }
+
+    return ret;
+}
+
 //----------------------------------------------------------------------------
 
 void mmGUIApp::OnFatalException()
@@ -213,8 +231,6 @@ int mmGUIApp::OnExit()
     usage->USAGEDATE = wxDate::Today().FormatISODate();
     usage->JSONCONTENT = Model_Usage::instance().to_string();
     Model_Usage::instance().save(usage);
-    if (Model_Setting::instance().GetBoolSetting(INIDB_SEND_USAGE_STATS, true))
-        Model_Usage::send();
 
     if (m_setting_db) delete m_setting_db;
 

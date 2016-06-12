@@ -27,6 +27,7 @@
 #include "model/Model_Currency.h"
 #include "model/Model_Setting.h"
 #include "model/Model_Translink.h"
+#include "model/Model_Usage.h"
 #include <wx/srchctrl.h>
 
 /*******************************************************/
@@ -164,7 +165,7 @@ void mmAssetsListCtrl::OnListKeyDown(wxListEvent& event)
 
 void mmAssetsListCtrl::OnNewAsset(wxCommandEvent& /*event*/)
 {
-    mmAssetDialog dlg(this, (Model_Asset::Data*)nullptr);
+    mmAssetDialog dlg(this, m_panel->m_frame, (Model_Asset::Data*)nullptr);
     if (dlg.ShowModal() == wxID_OK)
     {
         doRefreshItems(dlg.m_asset->ASSETID);
@@ -295,7 +296,7 @@ void mmAssetsListCtrl::OnListItemActivated(wxListEvent& event)
 
 bool mmAssetsListCtrl::EditAsset(Model_Asset::Data* pEntry)
 {
-    mmAssetDialog dlg(this, pEntry);
+    mmAssetDialog dlg(this, m_panel->m_frame, pEntry);
     bool edit = true;
     if (dlg.ShowModal() == wxID_OK)
     {
@@ -360,7 +361,7 @@ BEGIN_EVENT_TABLE(mmAssetsPanel, wxPanel)
 END_EVENT_TABLE()
 /*******************************************************/
 
-mmAssetsPanel::mmAssetsPanel(mmGUIFrame* frame, wxWindow *parent, wxWindowID winid)
+mmAssetsPanel::mmAssetsPanel(mmGUIFrame* frame, wxWindow *parent, wxWindowID winid, const wxString& name)
     : m_filter_type(Model_Asset::TYPE(-1))
     , m_frame(frame)
     , m_listCtrlAssets()
@@ -368,7 +369,7 @@ mmAssetsPanel::mmAssetsPanel(mmGUIFrame* frame, wxWindow *parent, wxWindowID win
     , header_text_()
     , tips_()
 {
-    Create(parent, winid, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL, wxPanelNameStr);
+    Create(parent, winid, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL, name);
 }
 
 bool mmAssetsPanel::Create(wxWindow *parent
@@ -396,6 +397,9 @@ bool mmAssetsPanel::Create(wxWindow *parent
     this->windowsFreezeThaw();
     GetSizer()->Fit(this);
     GetSizer()->SetSizeHints(this);
+
+    Model_Usage::instance().pageview(this);
+
     return true;
 }
 
@@ -755,7 +759,7 @@ void mmAssetsPanel::OnSearchTxtEntered(wxCommandEvent& event)
 void mmAssetsPanel::AddAssetTrans(const int selected_index)
 {
     Model_Asset::Data* asset = &m_assets[selected_index];
-    mmAssetDialog asset_dialog(this, asset, true);
+    mmAssetDialog asset_dialog(this, m_frame, asset, true);
     asset_dialog.SetTransactionAccountName(asset->ASSETNAME);
     if (asset_dialog.ShowModal() == wxID_OK)
     {

@@ -296,7 +296,7 @@ mmGUIFrame::mmGUIFrame(mmGUIApp* app, const wxString& title
     if (Model_Setting::instance().GetStringSetting(INIDB_SEND_USAGE_STATS, "") == "")
     {
         mmAboutDialog(this, 5).ShowModal();
-        Model_Setting::instance().Set(INIDB_SEND_USAGE_STATS, "TRUE");
+        Option::instance().SendUsageStatistics(true);
     }
 
     //Check for new version at startup
@@ -2229,6 +2229,28 @@ void mmGUIFrame::OnNewAccount(wxCommandEvent& /*event*/)
         Model_Account::Data* account = Model_Account::instance().get(wizard->acctID_);
         mmNewAcctDialog dlg(account, this);
         dlg.ShowModal();
+        if (account->ACCOUNTTYPE == Model_Account::all_type()[Model_Account::ASSET])
+        {
+            wxMessageBox(_(
+                "Asset Accounts hold Asset transactions\n\n"
+                "Asset transactions are created within the Assets View\n"
+                "after the selection of the Asset within that view.\n\n"
+                "Asset Accounts can also hold normal transactions to regular accounts."
+                ), _("Asset Account Creation"));
+        }
+
+        if (account->ACCOUNTTYPE == Model_Account::all_type()[Model_Account::SHARES])
+        {
+            wxMessageBox(_(
+                "Share Accounts hold Share transactions\n\n"
+                "Share transactions are created within the Stock Portfolio View\n"
+                "after the selection of the Company Stock within the associated view.\n\n"
+                "These accounts only become visible after associating a Stock to the Share Account\n"
+                "Or by using the Menu View --> 'Display Share Accounts'\n"
+                "Share Accounts can also hold normal transactions to regular account."
+                ), _("Share Account Creation"));
+        }
+
         updateNavTreeControl();
     }
 

@@ -39,6 +39,7 @@
 #include "model/Model_Category.h"
 #include "model/Model_Attachment.h"
 #include "model/Model_Translink.h"
+#include "model/Model_Usage.h"
 #include "sharetransactiondialog.h"
 #include "assetdialog.h"
 #include "billsdepositsdialog.h"
@@ -144,6 +145,8 @@ bool mmCheckingPanel::Create(
     GetSizer()->Fit(this);
     GetSizer()->SetSizeHints(this);
     this->windowsFreezeThaw();
+
+    Model_Usage::instance().pageview(this);
 
     return true;
 }
@@ -778,9 +781,9 @@ const wxString mmCheckingPanel::getItem(long item, long column)
     case TransactionListCtrl::COL_CATEGORY:
         return tran.CATEGNAME;
     case TransactionListCtrl::COL_PAYEE_STR:
-        return tran.PAYEENAME;
+        return tran.is_foreign_transfer() ? "< " + tran.PAYEENAME : tran.PAYEENAME;
     case TransactionListCtrl::COL_STATUS:
-        return tran.STATUS;
+        return tran.is_foreign() ? "< " + tran.STATUS : tran.STATUS;
     case TransactionListCtrl::COL_WITHDRAWAL:
         return tran.AMOUNT <= 0 ? Model_Currency::toString(std::fabs(tran.AMOUNT), this->m_currency) : "";
     case TransactionListCtrl::COL_DEPOSIT:
@@ -1121,7 +1124,7 @@ void TransactionListCtrl::OnMouseRightClick(wxMouseEvent& event)
     menu.Append(MENU_SUBMENU_MARK_ALL, _("Mark all being viewed"), subGlobalOpMenu);
 
     // Disable menu items not ment for foreign transactions
-    if (Model_Checking::foreignTransaction(m_cp->m_trans.at(m_selectedIndex)))
+    if (is_foreign)
     {
         menu.Enable(MENU_ON_COPY_TRANSACTION, false);
         menu.Enable(MENU_ON_PASTE_TRANSACTION, false);
@@ -1278,6 +1281,8 @@ int TransactionListCtrl::OnGetItemColumnImage(long item, long column) const
     {
         res = ICON_NONE;
         wxString status = m_cp->getItem(item, COL_STATUS);
+        if (status.length() > 1)
+            status = status.Mid(2, 1);
         if ( status == "F")
             res = ICON_FOLLOWUP;
         else if (status == "R")
@@ -1584,7 +1589,7 @@ void TransactionListCtrl::OnEditTransaction(wxCommandEvent& /*event*/)
         }
         else
         {
-            mmAssetDialog dlg(this, &translink, &checking_entry);
+            mmAssetDialog dlg(this, m_cp->m_frame, &translink, &checking_entry);
             if (dlg.ShowModal() == wxID_OK)
             {
                 refreshVisualList(transaction_id);

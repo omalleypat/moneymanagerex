@@ -33,6 +33,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 #include "model/Model_Category.h"
 #include "model/Model_Checking.h"
 #include "model/Model_Attachment.h"
+#include "model/Model_Usage.h"
 
 /*******************************************************/
 wxBEGIN_EVENT_TABLE(UserTransactionPanel, wxPanel)
@@ -67,6 +68,7 @@ UserTransactionPanel::UserTransactionPanel(wxWindow *parent
     wxPanel::Create(parent, win_id, pos, size, style, name);
     Create();
     DataToControls();
+    Model_Usage::instance().pageview(this);
 }
 
 UserTransactionPanel::~UserTransactionPanel()
@@ -274,6 +276,8 @@ void UserTransactionPanel::SetLastPayeeAndCategory(const int account_id)
 
             if (Option::instance().TransCategorySelection() == Option::LASTUSED)
             {
+                m_payee_id = last_payee->PAYEEID;
+                m_category_id = last_payee->CATEGID;
                 m_category->SetLabelText(Model_Category::full_name(last_payee->CATEGID, last_payee->SUBCATEGID));
             }
         }
@@ -415,10 +419,14 @@ void UserTransactionPanel::OnAttachments(wxCommandEvent& WXUNUSED(event))
 
 bool UserTransactionPanel::ValidCheckingAccountEntry()
 {
-    if ((m_account_id != -1) && (m_payee_id != -1) && (m_category_id != -1))
+    if ((m_account_id != -1) && (m_payee_id != -1) && (m_category_id != -1) && (!m_entered_amount->GetValue().IsEmpty()))
+    {
         return true;
+    }
     else
+    {
         return false;
+    }
 }
 
 wxDateTime UserTransactionPanel::TransactionDate()

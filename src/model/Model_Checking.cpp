@@ -367,6 +367,16 @@ bool Model_Checking::Full_Data::has_split() const
     return !this->m_splits.empty();
 }
 
+bool Model_Checking::Full_Data::is_foreign() const
+{
+    return (this->TOACCOUNTID > 0) && ((this->TRANSCODE == all_type()[DEPOSIT]) || (this->TRANSCODE == all_type()[WITHDRAWAL]));
+}
+
+bool Model_Checking::Full_Data::is_foreign_transfer() const
+{
+    return is_foreign() && (this->TOACCOUNTID == Model_Translink::AS_TRANSFER);
+}
+
 wxString Model_Checking::Full_Data::info() const
 {
     // TODO more info
@@ -378,7 +388,7 @@ wxString Model_Checking::Full_Data::info() const
 void Model_Checking::getFrequentUsedNotes(std::vector<wxString> &frequentNotes, int accountID)
 {
     frequentNotes.clear();
-    int max = 20;
+    size_t max = 20;
 
     const auto notes = instance().find(NOTES("", NOT_EQUAL)
         , accountID > 0 ? ACCOUNTID(accountID) : ACCOUNTID(-1, NOT_EQUAL));
